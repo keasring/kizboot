@@ -100,9 +100,9 @@ class ScsiTransport(
 
     /** CLEAR_FEATURE(ENDPOINT_HALT) — снятие состояния STALL на эндпоинте. */
     private fun clearHalt(endpoint: UsbEndpoint) {
-        val requestType = UsbConstants.USB_DIR_OUT or
-            UsbConstants.USB_TYPE_STANDARD or
-            UsbConstants.USB_RECIP_ENDPOINT
+        // bmRequestType: DIR_OUT | TYPE_STANDARD | RECIP_ENDPOINT (0x02, UsbConstants
+        // констант USB_RECIP_* не экспортирует — значения из спецификации USB 2.0).
+        val requestType = UsbConstants.USB_DIR_OUT or UsbConstants.USB_TYPE_STANDARD or 0x02
         connection.controlTransfer(requestType, 0x01, 0x00, endpoint.address, null, 0, 1_000)
     }
 
@@ -259,12 +259,10 @@ class ScsiTransport(
 
     /**
      * BULK ONLY MASS STORAGE RESET — аварийный сброс устройства class-запросом
-     * с последующей очисткой STALL на обоих эндпоинтах.
+     * (RECIP_INTERFACE = 0x01) с последующей очисткой STALL на обоих эндпоинтах.
      */
     fun massStorageReset() {
-        val requestType = UsbConstants.USB_DIR_OUT or
-            UsbConstants.USB_TYPE_CLASS or
-            UsbConstants.USB_RECIP_INTERFACE
+        val requestType = UsbConstants.USB_DIR_OUT or UsbConstants.USB_TYPE_CLASS or 0x01
         connection.controlTransfer(requestType, 0xFF, 0x00, interfaceNumber, null, 0, 5_000)
         clearHalt(bulkIn)
         clearHalt(bulkOut)

@@ -171,7 +171,7 @@ class UsbController(private val context: Context) {
                 ?: throw IllegalStateException("Bulk IN эндпоинт не найден")
             val bulkOut = findBulkEndpoint(iface, UsbConstants.USB_DIR_OUT)
                 ?: throw IllegalStateException("Bulk OUT эндпоинт не найден")
-            val scsi = ScsiTransport(connection, bulkIn, bulkOut, iface)
+            val scsi = ScsiTransport(connection, bulkIn, bulkOut, iface.id)
             waitReady(scsi)
             return UsbSession(device, connection, iface, scsi)
         } catch (e: Exception) {
