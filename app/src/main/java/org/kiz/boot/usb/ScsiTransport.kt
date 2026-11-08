@@ -52,6 +52,14 @@ class ScsiTransport(
         private const val BULK_TIMEOUT_MS = 10_000
         private const val SENSE_LENGTH = 18
         private const val MAX_SECTORS_PER_CSW = 65535
+
+        /**
+         * Порция одного bulkTransfer-вызова. Часть Android-устройств не принимает
+         * одиночные usbfs-URB крупнее 16 КиБ (EMSGSIZE), поэтому фаза данных
+         * SCSI-команды режется на такие порции — протоколу BBB разбиение
+         * безразлично, важен только суммарный объём dCBWDataTransferLength.
+         */
+        private const val BULK_CHUNK_BYTES = 16 * 1024
     }
 
     private var tag = 0x4B495A42 // 'KIZB'
@@ -64,14 +72,16 @@ class ScsiTransport(
 
     /**
      * Надёжный bulk-обмен: добивает недокачанные фрагменты, снимает STALL
-     * (CLEAR_FEATURE ENDPOINT_HALT) и ретраит при сбоях.
+     * (CLEAR_FEATURE ENDPOINT_HALT) и ретраит при сбоях. Данные идут порциями
+     * [BULK_CHUNK_BYTES] — см. пояснение к константе.
      */
     private fun bulk(endpoint: UsbEndpoint, buffer: ByteArray, offset: Int, length: Int): Int {
         var done = 0
         var failures = 0
         while (done < length) {
+            val chunk = minOf(BULK_CHUNK_BYTES, length - done)
             val transferred = connection.bulkTransfer(
-                endpoint, buffer, offset + done, length - done, BULK_TIMEOUT_MS
+                endpoint, buffer, offset + done, chunk, BULK_TIMEOUT_MS
             )
             when {
                 transferred < 0 -> {
