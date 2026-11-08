@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">kizBoot</string>
+
+    <!-- Главный экран -->
+    <string name="section_image">Образ</string>
+    <string name="section_usb">USB-накопители</string>
+    <string name="no_file_selected">Файл не выбран</string>
+    <string name="image_hint">Поддерживаются файлы *.iso и *.img</string>
+    <string name="file_too_big">Образ больше ёмкости накопителя</string>
+    <string name="no_drives">Накопители не найдены. Подключите флешку через OTG-адаптер и нажмите «Обновить».</string>
+    <string name="access_granted">Доступ разрешён</string>
+    <string name="action_select_image">Выбрать образ…</string>
+    <string name="action_refresh">Обновить</string>
+    <string name="action_grant_access">Предоставить доступ</string>
+    <string name="action_write">Записать</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_format">Форматировать в FAT32</string>
+
+    <!-- Настройки -->
+    <string name="setting_keep_screen_on">Keep screen on</string>
+    <string name="setting_keep_screen_on_desc">Не гасить экран во время работы приложения</string>
+    <string name="setting_verify">Верификация после записи</string>
+    <string name="setting_verify_desc">Побайтовая сверка записанного с исходным файлом</string>
+
+    <!-- Прогресс -->
+    <string name="phase_preparing">Подготовка…</string>
+    <string name="phase_writing">Запись образа…</string>
+    <string name="phase_verifying">Верификация…</string>
+    <string name="phase_formatting">Форматирование FAT32…</string>
+    <string name="eta_left">Осталось: %1$s</string>
+    <string name="eta_unknown">Расчёт времени…</string>
+
+    <!-- Диалоги подтверждения -->
+    <string name="confirm_write_title">Записать образ?</string>
+    <string name="confirm_write_text">Все данные на накопителе «%2$s» будут уничтожены. На него начисто будет записан образ «%1$s». Продолжить?</string>
+    <string name="confirm_format_title">Отформатировать в FAT32?</string>
+    <string name="confirm_format_text">С накопителя будут удалены все разделы и данные, будет создан один раздел FAT32. Продолжить?</string>
+
+    <!-- Уведомления -->
+    <string name="notif_channel">Запись образа</string>
+    <string name="notif_channel_desc">Прогресс записи и верификации образов на USB-накопители</string>
+    <string name="notif_preparing">Подготовка…</string>
+    <string name="notif_done">Запись завершена</string>
+    <string name="notif_error">Ошибка записи</string>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Фильтр USB_DEVICE_ATTACHED: приложение предлагается открыть при подключении
+    накопителей перечисленных производителей (vendor-id в десятичном виде).
+    Устройства других VID остаются доступны через кнопку «Обновить» на главном экране.
+-->
+<resources>
+    <!-- SanDisk -->
+    <usb-device vendor-id="1921" />
+    <!-- Kingston -->
+    <usb-device vendor-id="2385" />
+    <!-- Transcend -->
+    <usb-device vendor-id="34148" />
+    <!-- Toshiba -->
+    <usb-device vendor-id="2352" />
+    <!-- PNY -->
+    <usb-device vendor-id="5451" />
+    <!-- Silicon Motion (множество noname-флешек) -->
+    <usb-device vendor-id="2316" />
+    <!-- Western Digital -->
+    <usb-device vendor-id="4184" />
+    <!-- Seagate -->
+    <usb-device vendor-id="3010" />
+    <!-- Samsung -->
+    <usb-device vendor-id="1256" />
+    <!-- Sony -->
+    <usb-device vendor-id="1356" />
+    <!-- ADATA -->
+    <usb-device vendor-id="4719" />
+    <!-- Verbatim -->
+    <usb-device vendor-id="6309" />
+    <!-- Lexar -->
+    <usb-device vendor-id="1500" />
+    <!-- Alcor (контроллеры noname-флешек) -->
+    <usb-device vendor-id="1423" />
+    <!-- Genesys Logic (контроллеры ридеров и флешек) -->
+    <usb-device vendor-id="1507" />
+</resources>
